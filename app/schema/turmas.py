@@ -30,7 +30,7 @@ class PostTurmas(BaseModel):
     
     disciplina: str = Field(None, description="disciplina Documentar")
     sala: UUID = Field(None, description="sala Documentar")
-    nome_professor: str = Field(None, description="nome_professor Documentar")
+    nome_professor: str = Field(None, description="usuário do tipo professor")
     turno: str = Field(None, description="turno Documentar")
     horario: time = Field(None, description="horario Documentar")
     ano: date = Field(None, description="ano Documentar")
@@ -73,7 +73,7 @@ class PostTurmas(BaseModel):
         cls,
         disciplina: str = Form(None, description="disciplina Documentar"),
         sala: UUID = Form(None, description="sala Documentar"),
-        nome_professor: str = Form(None, description="nome_professor Documentar"),
+        nome_professor: str = Form(None, description="usuário do tipo professor"),
         turno: str = Form(None, description="turno Documentar"),
         horario: time = Form(None, description="horario Documentar"),
         ano: date = Form(None, description="ano Documentar"),
@@ -111,7 +111,7 @@ class GetTurmas(BaseModel):
     
     disciplina: str | None = Field(None, description="disciplina Documentar")
     sala: UUID | None = Field(None, description="sala Documentar")
-    nome_professor: str | None = Field(None, description="nome_professor Documentar")
+    nome_professor: str | None = Field(None, description="usuário do tipo professor")
     turno: str | None = Field(None, description="turno Documentar")
     horario: time | None = Field(None, description="horario Documentar")
     ano: date | None = Field(None, description="ano Documentar")
@@ -137,7 +137,7 @@ class PutTurmas(BaseModel):
     
     disciplina: str = Field(None, description="disciplina Documentar")
     sala: UUID = Field(None, description="sala Documentar")
-    nome_professor: str = Field(None, description="nome_professor Documentar")
+    nome_professor: str = Field(None, description="usuário do tipo professor")
     turno: str = Field(None, description="turno Documentar")
     horario: time = Field(None, description="horario Documentar")
     ano: date = Field(None, description="ano Documentar")
