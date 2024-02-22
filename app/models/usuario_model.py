@@ -14,7 +14,9 @@ class Usuario(Base):
     papel_uuid = db.Column(db.UUID(as_uuid=True), db.ForeignKey("papeis.uuid"))
     escola_name = db.Column(db.String)
     papel_name = db.Column(db.String)
-    access_level = db.Column(db.String)
+    access_level = db.Column(db.Integer)
     
     papel = db.relationship("Papel", back_populates="usuarios")
     escola = db.relationship("Escolas", back_populates="usuarios")
+
+

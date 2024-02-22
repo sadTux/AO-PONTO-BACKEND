@@ -41,7 +41,7 @@ class PostUsuario(BaseModel):
     papel_uuid: UUID = Field(None, description="papel_uuid Documentar")
     escola_name: str = Field(None, description="escola_name Documentar")
     papel_name: str = Field(None, description="papel_name Documentar")
-    access_level: str = Field(None, description="access_level Documentar")
+    access_level: int = Field(None, description="access_level Documentar")
     
     validate_senha = validator("senha", allow_reuse=True)(
         util.normalize_password
@@ -109,7 +109,7 @@ class PostUsuario(BaseModel):
         papel_uuid: UUID = Form(None, description="papel_uuid Documentar"),
         escola_name: str = Form(None, description="escola_name Documentar"),
         papel_name: str = Form(None, description="papel_name Documentar"),
-        access_level: str = Form(None, description="access_level Documentar"),
+        access_level: int = Form(None, description="access_level Documentar"),
         uuid: UUID = Form(..., description="uuid Documentar"),
         created_at: datetime = Form(..., description="created_at Documentar"),
         updated_at: datetime = Form(None, description="updated_at Documentar"),
@@ -158,7 +158,7 @@ class GetUsuario(BaseModel):
     papel_uuid: UUID | None = Field(None, description="papel_uuid Documentar")
     escola_name: str | None = Field(None, description="escola_name Documentar")
     papel_name: str | None = Field(None, description="papel_name Documentar")
-    access_level: str | None = Field(None, description="access_level Documentar")
+    access_level: int | None = Field(None, description="access_level Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
     updated_at: datetime | None = Field(None, description="updated_at Documentar")
@@ -191,4 +191,4 @@ class PutUsuario(BaseModel):
     papel_uuid: UUID = Field(None, description="papel_uuid Documentar")
     escola_name: str = Field(None, description="escola_name Documentar")
     papel_name: str = Field(None, description="papel_name Documentar")
-    access_level: str = Field(None, description="access_level Documentar")
+    access_level: int = Field(None, description="access_level Documentar")
