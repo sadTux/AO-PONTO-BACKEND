@@ -14,7 +14,7 @@ router = APIRouter(prefix="/relatorio-merendeiras", tags=["RelatorioMerendeiras"
 )
 def get_relatorio_merendeiras(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetRelatorioMerendeiras] | schema.GetRelatorioMerendeiras:
     """Realiza requisiçoes tipo **GET** em **RelatorioMerendeiras** models
 
@@ -42,7 +42,7 @@ def get_relatorio_merendeiras(
 @router.post("/", response_model=schema.GetRelatorioMerendeiras, status_code=201)
 def create_relatorio_merendeiras(
     json_data: schema.PostRelatorioMerendeiras,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetRelatorioMerendeiras:
     """Recebe uma requisição tipo `POST` contendo dados referente a **RelatorioMerendeiras**
 
@@ -67,7 +67,7 @@ def create_relatorio_merendeiras(
 def update_relatorio_merendeiras_by_uuid(
     uuid: UUID4,
     json_data: schema.PutRelatorioMerendeiras,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetRelatorioMerendeiras:
     """Atualiza um dado na tabela **RelatorioMerendeiras** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_relatorio_merendeiras_by_uuid(
 @router.delete("/")
 def delete_relatorio_merendeiras_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **RelatorioMerendeiras** a partir do seu UUID
 

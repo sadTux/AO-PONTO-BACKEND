@@ -14,7 +14,7 @@ router = APIRouter(prefix="/disciplinas", tags=["Disciplinas"])
 )
 def get_disciplinas(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetDisciplinas] | schema.GetDisciplinas:
     """Realiza requisiçoes tipo **GET** em **Disciplinas** models
 
@@ -42,7 +42,7 @@ def get_disciplinas(
 @router.post("/", response_model=schema.GetDisciplinas, status_code=201)
 def create_disciplinas(
     json_data: schema.PostDisciplinas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetDisciplinas:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Disciplinas**
 
@@ -67,7 +67,7 @@ def create_disciplinas(
 def update_disciplinas_by_uuid(
     uuid: UUID4,
     json_data: schema.PutDisciplinas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetDisciplinas:
     """Atualiza um dado na tabela **Disciplinas** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_disciplinas_by_uuid(
 @router.delete("/")
 def delete_disciplinas_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Disciplinas** a partir do seu UUID
 

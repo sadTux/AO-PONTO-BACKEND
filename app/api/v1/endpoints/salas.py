@@ -14,7 +14,7 @@ router = APIRouter(prefix="/salas", tags=["Salas"])
 )
 def get_salas(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetSalas] | schema.GetSalas:
     """Realiza requisiçoes tipo **GET** em **Salas** models
 
@@ -42,7 +42,7 @@ def get_salas(
 @router.post("/", response_model=schema.GetSalas, status_code=201)
 def create_salas(
     json_data: schema.PostSalas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetSalas:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Salas**
 
@@ -67,7 +67,7 @@ def create_salas(
 def update_salas_by_uuid(
     uuid: UUID4,
     json_data: schema.PutSalas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetSalas:
     """Atualiza um dado na tabela **Salas** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_salas_by_uuid(
 @router.delete("/")
 def delete_salas_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Salas** a partir do seu UUID
 

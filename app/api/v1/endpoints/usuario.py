@@ -14,7 +14,7 @@ router = APIRouter(prefix="/usuario", tags=["Usuario"])
 )
 def get_usuario(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetUsuario] | schema.GetUsuario:
     """Realiza requisiçoes tipo **GET** em **Usuario** models
 
@@ -42,7 +42,7 @@ def get_usuario(
 @router.post("/", response_model=schema.GetUsuario, status_code=201)
 def create_usuario(
     json_data: schema.PostUsuario,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetUsuario:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Usuario**
 
@@ -67,7 +67,7 @@ def create_usuario(
 def update_usuario_by_uuid(
     uuid: UUID4,
     json_data: schema.PutUsuario,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetUsuario:
     """Atualiza um dado na tabela **Usuario** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_usuario_by_uuid(
 @router.delete("/")
 def delete_usuario_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Usuario** a partir do seu UUID
 

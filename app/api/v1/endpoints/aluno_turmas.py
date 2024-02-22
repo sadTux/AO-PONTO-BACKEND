@@ -14,7 +14,7 @@ router = APIRouter(prefix="/aluno-turmas", tags=["AlunoTurmas"])
 )
 def get_aluno_turmas(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetAlunoTurmas] | schema.GetAlunoTurmas:
     """Realiza requisiçoes tipo **GET** em **AlunoTurmas** models
 
@@ -42,7 +42,7 @@ def get_aluno_turmas(
 @router.post("/", response_model=schema.GetAlunoTurmas, status_code=201)
 def create_aluno_turmas(
     json_data: schema.PostAlunoTurmas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetAlunoTurmas:
     """Recebe uma requisição tipo `POST` contendo dados referente a **AlunoTurmas**
 
@@ -67,7 +67,7 @@ def create_aluno_turmas(
 def update_aluno_turmas_by_uuid(
     uuid: UUID4,
     json_data: schema.PutAlunoTurmas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetAlunoTurmas:
     """Atualiza um dado na tabela **AlunoTurmas** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_aluno_turmas_by_uuid(
 @router.delete("/")
 def delete_aluno_turmas_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **AlunoTurmas** a partir do seu UUID
 

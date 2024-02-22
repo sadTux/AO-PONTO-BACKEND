@@ -14,7 +14,7 @@ router = APIRouter(prefix="/frequencias", tags=["Frequencias"])
 )
 def get_frequencias(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetFrequencias] | schema.GetFrequencias:
     """Realiza requisiçoes tipo **GET** em **Frequencias** models
 
@@ -42,7 +42,7 @@ def get_frequencias(
 @router.post("/", response_model=schema.GetFrequencias, status_code=201)
 def create_frequencias(
     json_data: schema.PostFrequencias,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetFrequencias:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Frequencias**
 
@@ -67,7 +67,7 @@ def create_frequencias(
 def update_frequencias_by_uuid(
     uuid: UUID4,
     json_data: schema.PutFrequencias,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetFrequencias:
     """Atualiza um dado na tabela **Frequencias** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_frequencias_by_uuid(
 @router.delete("/")
 def delete_frequencias_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Frequencias** a partir do seu UUID
 

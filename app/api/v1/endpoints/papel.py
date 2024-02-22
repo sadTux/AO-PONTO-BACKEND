@@ -14,7 +14,7 @@ router = APIRouter(prefix="/papel", tags=["Papel"])
 )
 def get_papel(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetPapel] | schema.GetPapel:
     """Realiza requisiçoes tipo **GET** em **Papel** models
 
@@ -42,7 +42,7 @@ def get_papel(
 @router.post("/", response_model=schema.GetPapel, status_code=201)
 def create_papel(
     json_data: schema.PostPapel,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetPapel:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Papel**
 
@@ -67,7 +67,7 @@ def create_papel(
 def update_papel_by_uuid(
     uuid: UUID4,
     json_data: schema.PutPapel,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetPapel:
     """Atualiza um dado na tabela **Papel** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_papel_by_uuid(
 @router.delete("/")
 def delete_papel_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Papel** a partir do seu UUID
 

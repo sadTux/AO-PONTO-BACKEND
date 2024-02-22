@@ -14,7 +14,7 @@ router = APIRouter(prefix="/cardapio-escola", tags=["CardapioEscola"])
 )
 def get_cardapio_escola(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetCardapioEscola] | schema.GetCardapioEscola:
     """Realiza requisiçoes tipo **GET** em **CardapioEscola** models
 
@@ -42,7 +42,7 @@ def get_cardapio_escola(
 @router.post("/", response_model=schema.GetCardapioEscola, status_code=201)
 def create_cardapio_escola(
     json_data: schema.PostCardapioEscola,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetCardapioEscola:
     """Recebe uma requisição tipo `POST` contendo dados referente a **CardapioEscola**
 
@@ -67,7 +67,7 @@ def create_cardapio_escola(
 def update_cardapio_escola_by_uuid(
     uuid: UUID4,
     json_data: schema.PutCardapioEscola,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetCardapioEscola:
     """Atualiza um dado na tabela **CardapioEscola** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_cardapio_escola_by_uuid(
 @router.delete("/")
 def delete_cardapio_escola_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **CardapioEscola** a partir do seu UUID
 

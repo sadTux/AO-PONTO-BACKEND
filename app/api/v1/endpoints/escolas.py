@@ -14,7 +14,7 @@ router = APIRouter(prefix="/escolas", tags=["Escolas"])
 )
 def get_escolas(
     query_parameters: QueryParametersDep,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> list[schema.GetEscolas] | schema.GetEscolas:
     """Realiza requisiçoes tipo **GET** em **Escolas** models
 
@@ -42,7 +42,7 @@ def get_escolas(
 @router.post("/", response_model=schema.GetEscolas, status_code=201)
 def create_escolas(
     json_data: schema.PostEscolas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetEscolas:
     """Recebe uma requisição tipo `POST` contendo dados referente a **Escolas**
 
@@ -67,7 +67,7 @@ def create_escolas(
 def update_escolas_by_uuid(
     uuid: UUID4,
     json_data: schema.PutEscolas,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> schema.GetEscolas:
     """Atualiza um dado na tabela **Escolas** a partir de um UUID valido
 
@@ -96,7 +96,7 @@ def update_escolas_by_uuid(
 @router.delete("/")
 def delete_escolas_by_uuid(
     uuid: UUID4,
-    authorization: str = Depends(auth.Key.n0),
+    authorization: str = Depends(auth.Key.n1),
 ) -> str:
     """Deleta um dado na tabela **Escolas** a partir do seu UUID
 
