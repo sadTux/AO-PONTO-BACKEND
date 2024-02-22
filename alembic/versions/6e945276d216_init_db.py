@@ -113,7 +113,7 @@ def upgrade() -> None:
     sa.Column('papel_uuid', sa.UUID(), nullable=True),
     sa.Column('escola_name', sa.String(), nullable=True),
     sa.Column('papel_name', sa.String(), nullable=True),
-    sa.Column('access_level', sa.String(), nullable=True),
+    sa.Column('access_level', sa.Integer(), nullable=True),
     sa.Column('uuid', sa.UUID(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
