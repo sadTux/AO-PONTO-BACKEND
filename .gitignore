@@ -94,22 +94,7 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/#use-with-ide
-.pdm.toml
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
 # Celery stuff
@@ -120,14 +105,16 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
-
+app/uploads/*
+!app/uploads/__init__.py
+!alembiv/versions/__init__.py
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -152,9 +139,17 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+
+E61945A9A512ED5E1A3EE3F1A2365B88F8FE_E4E9EADA96734F01970E616FAB2FAC19
+# aux file
+temp.txt
+base.txt
+test.json
+trash.py
+t.txt
+*.jpeg
+.vscode
+models.json
+trash.md
+.env
+*:Zone.Identifier
