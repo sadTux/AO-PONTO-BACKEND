@@ -11,7 +11,7 @@ def post_login(login: schema.Login):
     """Logar"""
     try:
         user = models.Usuario.login("cpf", login.username, login.password)
-        key = [user.access_level]
+        key = [int(user.access_level)]
         sub = {
             "user_uuid": str(user.uuid),
             "key": [i for i in range(1, 10 + 1)] if 10 in key else key,
