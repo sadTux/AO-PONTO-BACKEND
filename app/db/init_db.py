@@ -104,7 +104,7 @@ def pop_db() -> None:
 			)
 			user_data = models.Usuario(**usuario_schema.model_dump())
 			user_data.create()
-	role_gestor = models.Papel.get("nome","Gestor")
+	role_gestor = models.Papel.get("nome","Admin")
 	if role_gestor:
 		if models.Usuario.get(
 			"cpf",
@@ -118,9 +118,8 @@ def pop_db() -> None:
 				senha=usuarios[0]["senha"],
 				papel_uuid=role_gestor.uuid,
 				papel_name=role_gestor.nome,
-				access_level=role_gestor.access_level,
+				access_level=str(role_gestor.access_level),
 				active=True,
 			)
 			user_data = models.Usuario(**usuario_schema.model_dump())
 			user_data.create()
-
