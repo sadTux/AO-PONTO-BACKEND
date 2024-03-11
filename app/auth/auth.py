@@ -10,12 +10,13 @@ from app import core, error, models
 __all__ = ["Key", "encode_token", "decode_token"]
 
 
-def validate_token(authorization: str) -> str:
-    if not authorization or not "Bearer" in authorization:
+def validate_token(token: str) -> str:
+    print(token)
+    if not token or not "Bearer" in token:
         raise error.CustomException(
             status_code=401, detail="Desculpe, você não tem permissão."
         )
-    token_parts = authorization.split(" ")
+    token_parts = token.split(" ")
     if len(token_parts) != 2:
         raise error.CustomException(
             status_code=401, detail="Desculpe, você não tem permissão."
@@ -25,6 +26,7 @@ def validate_token(authorization: str) -> str:
 
 def get_user_from_payload(payload: dict) -> models.Usuario:
     user_uuid = payload["sub"].get("user_uuid")
+    print(user_uuid)
     if not user_uuid:
         raise error.CustomException(
             status_code=401, detail="Desculpe, você não tem permissão."
@@ -41,12 +43,14 @@ def get_user_from_payload(payload: dict) -> models.Usuario:
     return user
 
 
-def decode_token(authorization: str, key: Union[int, None] = None) -> dict:
+def decode_token(token: str, key: Union[int, None] = None) -> dict:
     try:
-        token = validate_token(authorization)
+        token = validate_token(token)
+        print(token)
         payload = jwt.decode(
             token, core.settings.SECRET_KEY, algorithms="HS256"
         )
+        print(payload["sub"])
         if "user_uuid" in payload["sub"]:
             user = get_user_from_payload(payload)
         if key and key not in payload["sub"].get("key", []):
@@ -85,38 +89,38 @@ def encode_token(sub, exp):
 class Key:
     # vefifica se o usuario tem o nivel de permissao Maximo N5
     async def n5(
-        authorization: Optional[str] = Header(
+        token: Optional[str] = Header(
             None, description="Token OAuth2 'Bearer token'"
         )
     ):
-        payload = decode_token(authorization, 5)
+        payload = decode_token(token, 5)
         return payload
 
     # vefifica se o usuario tem o nivel de permissao N4
     async def n4(
-        authorization: Optional[str] = Header(
+        token: Optional[str] = Header(
             None, description="Token OAuth2 'Bearer token'"
         )
     ):
-        payload = decode_token(authorization, 4)
+        payload = decode_token(token, 4)
         return payload
 
     # vefifica se o usuario tem o nivel de permissao N3
     async def n3(
-        authorization: Optional[str] = Header(
+        token: Optional[str] = Header(
             None, description="Token OAuth2 'Bearer token'"
         )
     ):
-        payload = decode_token(authorization, 3)
+        payload = decode_token(token, 3)
         return payload
 
     # vefifica se o usuario tem o nivel de permissao N2
     async def n2(
-        authorization: Optional[str] = Header(
+        token: Optional[str] = Header(
             None, description="Token OAuth2 'Bearer token'"
         )
     ):
-        payload = decode_token(authorization, 2)
+        payload = decode_token(token, 2)
         if not models.Usuario.exist("uuid", payload["user_uuid"]):
             raise error.CustomException(
                 status_code=401, detail="Usuario nao encontrado"
@@ -125,11 +129,12 @@ class Key:
 
     # vefifica se o usuario tem o nivel de permissao minima N1
     async def n1(
-        authorization: Optional[str] = Header(
+        token: Optional[str] = Header(
             None, description="Token OAuth2 **'Bearer token'**"
         )
     ):
-        payload = decode_token(authorization)
+
+        payload = decode_token(token)
         return payload
 
     async def n0():
