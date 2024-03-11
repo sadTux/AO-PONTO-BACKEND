@@ -8,7 +8,6 @@ from datetime import datetime
 from io import BytesIO
 
 import magic
-from faker import Faker
 
 from app import error
 
@@ -21,7 +20,6 @@ __all__ = [
     "generate_code",
     "camel_to_kebab",
     "camel_to_snake_case",
-    "generate_fake_data",
 ]
 
 
@@ -192,85 +190,3 @@ def generate_code():
         string.ascii_uppercase
     )
     return random_char + random_number
-
-
-def generate_fake_data(data_type, size=None):
-    """
-    Gera dados fictícios para um tipo de dado especificado usando a biblioteca Faker.
-
-    Parâmetros:
-    data_type (str): Tipo de dado para o qual gerar um valor fictício. Os tipos suportados incluem
-                     'string', 'int', 'float', 'date', 'datetime', 'email', 'bool', 'url', 'ipv4',
-                     'ipv6', 'address', 'phone_number', 'name', 'company', 'text', 'json', 'list',
-                     e 'dict'.
-    size (int, opcional): Define o tamanho ou o limite para o valor gerado. Para strings, representa
-                          o comprimento máximo; para inteiros, o valor máximo; para textos, o número
-                          máximo de caracteres; para listas e dicionários, o número de elementos.
-
-    Retorna:
-    O valor fictício gerado, cujo tipo depende do parâmetro `data_type`.
-
-    Exemplos de Uso:
-    - generate_fake_data('string', 10)    # Gera uma string aleatória com até 10 caracteres.
-    - generate_fake_data('int', 100)      # Gera um inteiro aleatório até 100.
-    - generate_fake_data('date')          # Gera uma data aleatória.
-    - generate_fake_data('list', 3)       # Gera uma lista com 3 palavras aleatórias.
-    - generate_fake_data('json')          # Gera uma string JSON aleatória.
-    """
-
-    fake = Faker("pt_BR")
-
-    # Dicionário de correspondência de tipos de dados com métodos Faker
-    type_methods = {
-        "str": lambda: fake.pystr(min_chars=1, max_chars=size if size else 20),
-        "UUID": lambda: uuid.uuid4(),
-        "int": lambda: fake.pyint(
-            min_value=0, max_value=size if size else 10000
-        ),
-        "float": lambda: float(
-            fake.pydecimal(left_digits=2, right_digits=2, positive=True)
-        ),
-        "date": lambda: fake.date_between(start_date="-30y", end_date="today"),
-        "datetime": lambda: fake.date_time_between(
-            start_date="-30y", end_date="now"
-        ),
-        "email": lambda: fake.email(),
-        "password": lambda: fake.pystr(),
-        "bool": lambda: fake.pybool(),
-        "url": lambda: fake.url(),
-        "ipv4": lambda: fake.ipv4(),
-        "ipv6": lambda: fake.ipv6(),
-        "address": lambda: fake.address(),
-        "phone_number": lambda: fake.phone_number(),
-        "name": lambda: fake.name(),
-        "username": lambda: fake.name(),
-        "company": lambda: fake.company(),
-        "text": lambda: fake.text(max_nb_chars=size if size else 200),
-        "json": lambda: fake.json(data_columns=None, num_rows=1),
-        "list": lambda: [fake.word() for _ in range(size if size else 5)],
-        "dict": lambda: {
-            fake.word(): fake.word() for _ in range(size if size else 5)
-        },
-        "street_name": lambda: fake.street_name(),
-        "building_number": lambda: fake.building_number(),
-        "city": lambda: fake.city(),
-        "state": lambda: fake.state(),
-        "postcode": lambda: fake.postcode(),
-        "country": lambda: fake.country(),
-        "latitude": lambda: fake.latitude(),
-        "longitude": lambda: fake.longitude(),
-        "first_name": lambda: fake.first_name(),
-        "last_name": lambda: fake.last_name(),
-        "cpf": lambda: fake.cpf(),  # Se disponível
-        "cnpj": lambda: fake.cnpj(),  # Se disponível
-        "phone_number": lambda: fake.phone_number(),
-        "credit_card_number": lambda: fake.credit_card_number(),
-        "currency_code": lambda: fake.currency_code(),
-        "file_name": lambda: fake.file_name(),
-        "language_code": lambda: fake.language_code(),
-        "license_plate": lambda: fake.license_plate(),
-        "user_agent": lambda: fake.user_agent(),
-    }
-
-    # Executa o método correspondente ao tipo de dado solicitado
-    return type_methods.get(data_type, lambda: None)()
